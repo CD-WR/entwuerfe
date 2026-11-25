@@ -199,6 +199,10 @@ body[data-nav-open] .site-nav a:not(.btn) { color: var(--c-on-dark); }
 /* Offenes Menü: Header (und damit das Menü darin) über die Abdunkelung (z 105) heben,
    sonst liegt die Abdunkelung auf den Menüpunkten und sie sind nicht antippbar. */
 body[data-nav-open] .site-header { z-index: 120; }
+/* Offenes Menü: Seite dahinter scrollt nicht mit. overflow:hidden auf <html> lässt die
+   Scrollposition stehen (kein Springen); im Menü selbst kein „Durchrutschen“ zur Seite. */
+html.nav-offen, html.nav-offen body { overflow: hidden; }
+.site-nav { overscroll-behavior: contain; }
 body[data-nav-open]::before {
   content: ""; position: fixed; inset: 0; z-index: 105;
   background: color-mix(in srgb, var(--c-text) 55%, transparent);

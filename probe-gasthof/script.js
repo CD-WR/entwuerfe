@@ -39,6 +39,8 @@
 
     var open = function () {
       document.body.setAttribute("data-nav-open", "");
+      // Hintergrund steht still, solange das Menü offen ist (Klasse sperrt per CSS das Scrollen).
+      document.documentElement.classList.add("nav-offen");
       toggle.setAttribute("aria-expanded", "true");
       label.textContent = "Menü schließen";
       var first = nav.querySelector("a, button");
@@ -46,6 +48,7 @@
     };
     var close = function (returnFocus) {
       document.body.removeAttribute("data-nav-open");
+      document.documentElement.classList.remove("nav-offen");
       toggle.setAttribute("aria-expanded", "false");
       label.textContent = "Menü öffnen";
       if (returnFocus) toggle.focus();
@@ -53,6 +56,8 @@
     var isOpen = function () { return document.body.hasAttribute("data-nav-open"); };
 
     toggle.addEventListener("click", function () { isOpen() ? close(true) : open(); });
+    // Wird das Fenster breiter (Tablet gedreht), verschwindet das Handy-Menü – Sperre lösen.
+    window.matchMedia("(min-width: 60em)").addEventListener("change", function (e) { if (e.matches && isOpen()) close(false); });
     nav.addEventListener("click", function (e) { if (e.target.closest("a") && isOpen()) close(false); });
     document.addEventListener("click", function (e) {
       if (isOpen() && !nav.contains(e.target) && !toggle.contains(e.target)) close(false);
