@@ -183,7 +183,9 @@ p { text-wrap: pretty; }
 .nav-toggle__bar { top: 7px; }
 .nav-toggle__bar::before { top: -7px; }
 .nav-toggle__bar::after { top: 7px; }
-body[data-nav-open] .nav-toggle { color: var(--c-on-dark); }
+/* Spezifischer als „.site-header.is-scrolled .nav-toggle“ – sonst wäre das X nach dem
+   Scrollen dunkel auf dem dunklen Menü (im Android-Emulator gesehen, 26.11.). */
+body[data-nav-open] .site-header .nav-toggle { color: var(--c-on-dark); }
 body[data-nav-open] .nav-toggle__bar { background: transparent; }
 body[data-nav-open] .nav-toggle__bar::before { transform: translateY(7px) rotate(45deg); }
 body[data-nav-open] .nav-toggle__bar::after { transform: translateY(-7px) rotate(-45deg); }
